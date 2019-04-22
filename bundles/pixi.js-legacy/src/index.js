@@ -6,6 +6,7 @@ import { CanvasSpriteRenderer } from '@pixi/canvas-sprite';
 import * as canvasExtract from '@pixi/canvas-extract';
 import * as canvasPrepare from '@pixi/canvas-prepare';
 import '@pixi/canvas-sprite-tiling';
+import '@pixi/canvas-text';
 import '@pixi/canvas-particles';
 import '@pixi/canvas-display';
 

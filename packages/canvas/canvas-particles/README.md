@@ -1,13 +1,13 @@
-# @pixi/canvas-sprite-tiling
+# @pixi/canvas-sprite-particles
 
 ## Installation
 
 ```bash
-npm install @pixi/canvas-sprite-tiling
+npm install @pixi/canvas-sprite-particles
 ```
 
 ## Usage
 
 ```js
-import '@pixi/canvas-sprite-tiling';
+import '@pixi/canvas-sprite-particles';
 ```

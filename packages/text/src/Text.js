@@ -153,8 +153,8 @@ export default class Text extends Sprite
         const maxLineWidth = measured.maxLineWidth;
         const fontProperties = measured.fontProperties;
 
-        this.canvas.width = Math.ceil((Math.max(1, width) + (style.padding * 2)) * this._resolution);
-        this.canvas.height = Math.ceil((Math.max(1, height) + (style.padding * 2)) * this._resolution);
+        this.canvas.width = this._roundToEven((Math.max(1, width) + (style.padding * 2)) * this._resolution);
+        this.canvas.height = this._roundToEven((Math.max(1, height) + (style.padding * 2)) * this._resolution);
 
         context.scale(this._resolution, this._resolution);
 
@@ -324,9 +324,10 @@ export default class Text extends Sprite
     /**
      * Renders the object using the WebGL renderer
      *
+     * @private
      * @param {PIXI.Renderer} renderer - The renderer
      */
-    render(renderer)
+    _render(renderer)
     {
         if (this._autoResolution && this._resolution !== renderer.resolution)
         {
@@ -336,26 +337,7 @@ export default class Text extends Sprite
 
         this.updateText(true);
 
-        super.render(renderer);
-    }
-
-    /**
-     * Renders the object using the Canvas renderer
-     *
-     * @private
-     * @param {PIXI.CanvasRenderer} renderer - The renderer
-     */
-    _renderCanvas(renderer)
-    {
-        if (this._autoResolution && this._resolution !== renderer.resolution)
-        {
-            this._resolution = renderer.resolution;
-            this.dirty = true;
-        }
-
-        this.updateText(true);
-
-        super._renderCanvas(renderer);
+        super._render(renderer);
     }
 
     /**
@@ -390,6 +372,19 @@ export default class Text extends Sprite
     _onStyleChange()
     {
         this.dirty = true;
+    }
+
+    /**
+     * Rounds a value up to the nearest even number.
+     * We like the canvas dimensions to be even, so that text can remain sharp on an anchor of 0.5
+     *
+     * @private
+     * @param {number} value - Value to round up
+     * @return {number}
+     */
+    _roundToEven(value)
+    {
+        return 2 * Math.ceil(value / 2);
     }
 
     /**
